@@ -37,7 +37,7 @@
       
        
         {% if user.id == page_user.id %}
-          <button  id="upload" type="button" class="float-right btn btn-outline-secondary">Upload video</button>
+        <a href="{% url 'videos:add_video' %}"  role="button" class="float-right btn btn-outline-secondary">Upload video</a>
         {% endif %}
        
         <div class="ml-5">

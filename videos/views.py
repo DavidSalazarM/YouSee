@@ -2,10 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth import get_user_model
 from videos.models import Video
 from videos.forms import VideoForm
+from django.urls import reverse
+
 
 User = get_user_model()
 
@@ -31,13 +33,13 @@ def add_video(request):
             video.post = form.cleaned_data.get('post')
             video.save()
             data['form_is_valid'] = True
-            return JsonResponse(data)
+            return HttpResponseRedirect(
+                reverse('profile', args=[str(request.user.username)]))
         else:
             data['form_is_valid'] = False
-            data['video_form'] = render_to_string("videos/video_form.html", {'form': form}, request=request)  # noqa: E501
-
-    data['video_form'] = render_to_string("videos/video_form.html", {'form': form}, request=request)  # noqa: E501
-    return JsonResponse(data)
+            data['video_form'] = render_to_string(
+                "videos/video_form.html", {'form': form}, request=request)
+    return render(request, 'videos/video_form.html', {'form': form})
 
 
 @login_required
@@ -91,7 +93,7 @@ def comment(request):
 
 def profile(request, username):
     page_user = get_object_or_404(User, username=username)
-    all_videos = Video.objects.filter(parent=None).filter(user=page_user)
+    all_videos = Video.objects.filter(parent=None).filter(user=page_user).order_by('-date')
     return render(request, 'videos/profile.html', {'page_user': page_user, 'all_videos': all_videos})  # noqa: E501
 
 

@@ -28,7 +28,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = ['yousee01.herokuapp.com',]
+ALLOWED_HOSTS = ['127.0.0.1:8000', 'localhost', '127.0.0.1','yousee01.herokuapp.com',]
 
 
 # Application definition
@@ -82,8 +82,7 @@ WSGI_APPLICATION = 'yousee.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-}
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
 
 
 
