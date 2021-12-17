@@ -67,21 +67,7 @@
            
          </div>
          
-       </div> 
-      
-       <span class="comments">Comments</span> (<span id="commentcount">{{video.calculate_comments}}</span>)
-       
-       <div class="my-4">
-         <form id="comment" role="form" method="post" action="#" onsubmit="return false">
-           <input type="hidden" name="video_id" value="{{video.id}}">
-           <input id="usercomment"  type="text" class="form-control input-sm" placeholder=" Write a comment... " name="post" maxlength="255">
-         </form>
-       </div>
-      
-       <ul id="commentcontainer" class="mb-4 clearfix">
-         {% include 'videos/partial_video_comments.html' %}
-       </ul>
-     
+       </div>     
      
     </div>  
    
