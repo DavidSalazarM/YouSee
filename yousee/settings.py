@@ -31,7 +31,6 @@ DEBUG = os.environ['DEBUG']
 ALLOWED_HOSTS = ['127.0.0.1:8000', 'localhost', '127.0.0.1','yousee01.herokuapp.com',]
 
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
