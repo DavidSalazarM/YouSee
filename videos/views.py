@@ -52,15 +52,15 @@ def edit_video(request, id):
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
-            return JsonResponse(data)
+            return HttpResponseRedirect(
+                reverse('profile', args=[str(request.user.username)]))
         else:
             data['form_is_valid'] = False
             data['edited_video'] = render_to_string(
                 "videos/edit_video.html", {'form': form}, request=request)
 
-    data['edit_video'] = render_to_string(
-        "videos/edit_video.html", {'form': form_instance}, request=request)
-    return JsonResponse(data)
+
+    return render(request, 'videos/edit_video.html', {'form': form_instance})
 
 
 def video(request, id):
